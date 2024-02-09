@@ -14,11 +14,14 @@ endef
 
 default: build
 
+del:
+	@rm -rf $(BINDIR)
+	
 clean:
-	@rm -rf $(BUILDDIR) $(INSTALLDIR)
-	@rm -f ToolChain.cmake
+	@rm -rf $(BUILDDIR) $(INSTALLDIR) $(BINDIR)
+	#@rm -f ToolChain.cmake
 
-run: build
+run:build
 	$(call log,Running C++ Client...)
 	@$(BINDIR)/cpp_client $(ARGS)
 
@@ -30,7 +33,7 @@ build: $(BINDIR)/cpp_client
 
 $(BINDIR)/cpp_client: | build_libcarla
 	$(call log,Compiling C++ Client...)
-	@mkdir -p $(BINDIR)
+	@mkdir -p $(BINDIR) 
 	@$(CXX) $(CXXFLAGS) -I$(INSTALLDIR)/include -isystem $(INSTALLDIR)/include/system -L$(INSTALLDIR)/lib \
 		-o $(BINDIR)/cpp_client main.cpp \
 		-Wl,-Bstatic -lcarla_client -lrpc -lboost_filesystem -Wl,-Bdynamic \
