@@ -84,6 +84,11 @@ int main(int argc, const char *argv[]) {
         world.SpawnActor(*camera_bp, camera_transform, actor.get());
     auto camera = boost::static_pointer_cast<cc::Sensor>(cam_actor);
 
+
+    // Create segmentation cam
+    // SegCam segCam(world);
+    float time = 0;
+    float setTime = 1;
     while (true) {
       // Update the vehicle's control or perform other simulation steps
 
@@ -100,6 +105,11 @@ int main(int argc, const char *argv[]) {
       // Set the spectator's transform
       spectator->SetTransform(spectator_transform);
 
+      if (time > setTime){
+        // segCam.takePicture();
+        setTime = time + 5;
+      }
+
       // print out where spectator is
       // auto loc = spectator->GetTransform();
       // std::cout << "location: " << loc.location.x << "," << loc.location.y <<
@@ -107,7 +117,8 @@ int main(int argc, const char *argv[]) {
 
       // Other simulation/rendering logic here
       std::this_thread::sleep_for(
-          std::chrono::milliseconds(16)); // Adjust the sleep duration as needed
+           std::chrono::milliseconds(16)); // Adjust the sleep duration as needed
+           time += 0.016;
     }
 
   } catch (const cc::TimeoutException &e) {
