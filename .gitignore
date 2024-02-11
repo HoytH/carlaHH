@@ -9,8 +9,8 @@ Plugins
 !Unreal/CarlaUE4/Plugins
 Unreal/CarlaUE4/Plugins/Streetmap
 Unreal/CarlaUE4/Plugins/HoudiniEngine
-
-
+HHClient/build/
+HHClient/libcarla-install
 /ExportedMaps
 /Import/*
 !/Import/README.md
