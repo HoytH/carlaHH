@@ -23,6 +23,7 @@ HHClient/libcarla-install
 *.kdev4
 *.log
 *.o
+*.cache
 *.pb.cc
 *.pb.h
 *.pid
