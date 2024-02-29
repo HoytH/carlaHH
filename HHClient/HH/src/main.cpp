@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include <random>
 #include <sstream>
 #include <stdexcept>
@@ -39,6 +40,9 @@ static auto ParseArguments(int argc, const char *argv[]) {
 }
 
 int main(int argc, const char *argv[]) {
+  // Test testa = Test();
+  // testa.imageParse();
+
   try {
     std::string host;
     uint16_t port;
@@ -85,9 +89,14 @@ int main(int argc, const char *argv[]) {
     auto camera = boost::static_pointer_cast<cc::Sensor>(cam_actor);
 
     // Create segmentation cam
-    SegCam segCam(world);
+    std::shared_ptr<SegCam> segCam = std::make_shared<SegCam>(world);
+    //Create Lidar 1
+    std::shared_ptr<LidarCam> LidarCam1 = std::make_shared<::LidarCam>(world,-1.69883, -33.9062, 30);
     float time = 0;
     float setTime = 1;
+    segCam->takePicture();
+    LidarCam1->takePicture();
+
     while (true) {
       // Update the vehicle's control or perform other simulation steps
 
@@ -103,11 +112,10 @@ int main(int argc, const char *argv[]) {
 
       // Set the spectator's transform
       spectator->SetTransform(spectator_transform);
-      std::cout << "setTime: " << setTime << "\ntime: " << time;
+      // std::cout << "setTime: " << setTime << "\ntime: " << time << "\n";
 
       if (time > setTime) {
-        segCam.takePicture();
-        setTime = setTime + 5;
+        setTime = setTime + 1;
       }
 
       // print out where spectator is
@@ -116,9 +124,9 @@ int main(int argc, const char *argv[]) {
       // "," << loc.location.z;
 
       // Other simulation/rendering logic here
-      std::this_thread::sleep_for(std::chrono::milliseconds(
-          100)); // Adjust the sleep duration as needed
-      time += 0.016;
+      std::this_thread::sleep_for(
+          std::chrono::milliseconds(50)); // Adjust the sleep duration as needed
+      time += 0.0;
     }
 
   } catch (const cc::TimeoutException &e) {

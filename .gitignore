@@ -1,4 +1,5 @@
 Build
+build
 Dist
 Doxygen
 Deprecated/PythonClient/dist
@@ -15,7 +16,6 @@ HHClient/libcarla-install
 /ExportedMaps
 /Import/*
 !/Import/README.md
-
 *.VC.db
 *.VC.opendb
 *.a

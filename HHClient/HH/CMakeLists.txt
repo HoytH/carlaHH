@@ -39,6 +39,14 @@ target_link_directories(HH PUBLIC ${CMAKE_SOURCE_DIR}/ext/libcarla-install/lib)
 # Link the Boost library directly
 target_link_libraries(HH PRIVATE ${CMAKE_SOURCE_DIR}/ext/libcarla-install/lib/libboost_atomic.so.1.80.0)
 
+# -------------------------------------
+# CREATE OpenCV
+#--------------------------------------
+set(OpenCV_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ext/opencv-4.x/build)
+find_package( OpenCV REQUIRED )                              
+target_link_libraries(HH PUBLIC ${OpenCV_LIBS})         
+
+
 # Set the RPATH for the executable
 set_target_properties(HH PROPERTIES
     INSTALL_RPATH "${CMAKE_SOURCE_DIR}/ext/libcarla-install/lib"
