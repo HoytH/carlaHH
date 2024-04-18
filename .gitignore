@@ -29,7 +29,6 @@ HHClient/libcarla-install
 *.pid
 *.pri
 *.pro
-*.py[cod]
 *.sln
 *.so
 *.stackdump

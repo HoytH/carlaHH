@@ -229,7 +229,7 @@ void LidarCam::saveImageToFile(const carla::sensor::data::SemanticLidarMeasureme
     }
     std::cout << "PRINT POINTS: " << "\n";
     for (const csd::SemanticLidarDetection a: lidar_data){
-        outfile << a.point.x << " " << a.point.y << " " << a.point.z << std::endl;
+        outfile << a.point.x << " " << a.point.y << " " << a.point.z << " " << a.object_tag << std::endl;
     };
 
     // Close the file
